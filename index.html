@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ar" dir="rtl" manifest="cache.appcache">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#08090c">
+  <meta name="site-version" content="hazzaz-ps4-13xx-v1">
+  <meta name="source-revision" content="raw13g/401f6cc0c27d5ec69f56e7aa740158cd4189c41d">
+  <title>Hazzaz Store | PS4 13.XX Host</title>
+  <meta name="description" content="واجهة Hazzaz Store لتشغيل PS4 HEN على الإصدارات 13.02 و13.04 و13.50 و13.52.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%2308090c'/%3E%3Cpath d='M16 14v36M48 14v36M16 32h32' stroke='%23ef233c' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; font-family: Arial, Tahoma, sans-serif; }
+    body { color: #f5f7fa; background: #08090c; }
+    button, a { font: inherit; }
+    .shell { min-height: 100vh; min-height: 100svh; position: relative; overflow: hidden; display: flex; flex-direction: column; isolation: isolate; background: linear-gradient(135deg,#08090c 0%,#0d0f14 48%,#090a0e 100%); }
+    .shell:before { content:""; position:absolute; inset:0; z-index:-2; background: radial-gradient(circle at 18% 28%,rgba(239,35,60,.21),transparent 26%), radial-gradient(circle at 82% 74%,rgba(239,35,60,.14),transparent 29%), repeating-linear-gradient(120deg,rgba(255,255,255,.023) 0 1px,transparent 1px 34px); }
+    .shell:after { content:""; position:absolute; z-index:-1; width:620px; height:620px; left:50%; top:54%; transform:translate(-50%,-50%); border:1px solid rgba(239,35,60,.10); border-radius:50%; box-shadow:0 0 0 70px rgba(239,35,60,.025),0 0 0 140px rgba(239,35,60,.018),0 0 120px rgba(239,35,60,.10); pointer-events:none; }
+    header { direction:ltr; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:21px 42px; border-bottom:1px solid rgba(255,255,255,.09); background:rgba(8,9,12,.72); }
+    .brand { display:flex; align-items:center; gap:13px; color:#fff; text-decoration:none; }
+    .brand-logo { display:block; width:52px; height:52px; padding:2px; border:1px solid rgba(239,35,60,.82); border-radius:50%; object-fit:cover; background:#08090c; box-shadow:0 0 0 5px rgba(239,35,60,.08),0 0 30px rgba(239,35,60,.27); }
+    .brand-copy { display:flex; flex-direction:column; line-height:1; }
+    .brand-copy strong { font-size:19px; letter-spacing:2.1px; }
+    .brand-copy strong span { color:#ef233c; }
+    .brand-copy small { margin-top:7px; color:rgba(255,255,255,.48); font-size:9px; letter-spacing:4px; }
+    .top-meta { display:flex; align-items:center; gap:10px; }
+    .live-dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:#ef233c; box-shadow:0 0 0 5px rgba(239,35,60,.11),0 0 18px #ef233c; }
+    .version-chip { direction:ltr; padding:9px 14px; border:1px solid rgba(255,255,255,.12); border-radius:8px; color:#fff; background:rgba(255,255,255,.04); font-size:11px; font-weight:900; letter-spacing:1px; }
+    main { flex:1; display:grid; place-items:center; padding:36px 24px; }
+    .ambient-copy { direction:ltr; position:absolute; z-index:-1; right:-2vw; bottom:4vh; left:-2vw; transform:rotate(-4deg); color:rgba(255,255,255,.025); text-align:center; white-space:nowrap; pointer-events:none; user-select:none; }
+    .ambient-copy strong { display:block; font-size:clamp(78px,13vw,190px); line-height:.72; letter-spacing:-7px; }
+    .ambient-copy span { display:block; margin-top:18px; color:rgba(239,35,60,.055); font-size:clamp(26px,5vw,72px); font-weight:950; letter-spacing:6px; }
+    .console { width:min(1050px,100%); display:grid; grid-template-columns:minmax(0,1.12fr) minmax(340px,.88fr); border:1px solid rgba(255,255,255,.12); border-radius:28px; overflow:hidden; background:rgba(13,15,20,.86); box-shadow:0 34px 100px rgba(0,0,0,.52); }
+    .intro { position:relative; overflow:hidden; padding:48px 50px 44px; border-left:1px solid rgba(255,255,255,.09); }
+    .intro:after { content:""; position:absolute; width:330px; height:330px; left:-85px; bottom:-95px; z-index:-1; border-radius:50%; background:url("./hazzaz-logo-red.jpg") center/cover no-repeat; opacity:.07; filter:grayscale(.15); pointer-events:none; }
+    .kicker { direction:ltr; margin:0 0 16px; color:#ef233c; font-size:11px; font-weight:950; letter-spacing:2.8px; text-transform:uppercase; }
+    h1 { margin:0; font-size:clamp(45px,7vw,76px); line-height:.93; letter-spacing:-3px; font-weight:950; }
+    h1 span { display:block; color:transparent; -webkit-text-stroke:1px rgba(255,255,255,.72); font-size:.52em; letter-spacing:7px; margin-bottom:9px; }
+    .lede { max-width:570px; margin:22px 0 26px; color:#c9cdd5; font-size:16px; font-weight:700; line-height:1.9; }
+    .lede strong { color:#fff; font-weight:950; }
+    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:25px; }
+    .feature { min-height:82px; padding:14px 12px; border:1px solid rgba(255,255,255,.08); border-radius:12px; background:rgba(255,255,255,.025); }
+    .feature b { display:block; color:#fff; font-size:13px; }
+    .feature small { display:block; margin-top:7px; color:rgba(255,255,255,.45); font-size:10px; line-height:1.5; }
+    .module { position:relative; display:flex; flex-direction:column; justify-content:center; padding:40px 34px; background:linear-gradient(160deg,rgba(239,35,60,.07),transparent 42%); }
+    .module-label { direction:ltr; display:flex; align-items:center; justify-content:space-between; margin-bottom:13px; color:rgba(255,255,255,.47); font-size:10px; font-weight:900; letter-spacing:2px; }
+    .module-label b { color:#ef233c; }
+    .firmwares { direction:ltr; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:13px; }
+    .firmwares span { padding:8px 4px; border:1px solid rgba(255,255,255,.09); border-radius:7px; color:#dfe2e8; background:rgba(0,0,0,.22); text-align:center; font-size:11px; font-weight:900; }
+    .status-card { padding:17px 16px; border:1px solid rgba(239,35,60,.24); border-radius:13px; background:rgba(0,0,0,.29); box-shadow:inset 3px 0 #ef233c; }
+    #state { min-height:24px; color:#fff; font-size:16px; font-weight:950; }
+    #det { direction:ltr; margin-top:6px; color:rgba(255,255,255,.48); font-size:10px; letter-spacing:.45px; }
+    #det b { color:#fff; }
+    #cache { min-height:17px; margin-top:7px; color:rgba(255,255,255,.44); font-size:10px; font-weight:700; }
+    #cache.cacheok { color:#8ce99a; }
+    .ok { color:#8ce99a!important; }.bad{color:#ff6b7a!important}.warn{color:#ffd166!important}
+    .run { direction:ltr; width:100%; display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:14px; padding:17px 18px; border:0; border-radius:11px; color:#fff; background:linear-gradient(100deg,#b9162a,#ef233c); font-size:17px; font-weight:950; letter-spacing:.6px; cursor:pointer; box-shadow:0 16px 38px rgba(239,35,60,.22); transition:transform .18s ease,filter .18s ease,opacity .18s ease; }
+    .run:hover,.run:focus { transform:translateY(-2px); filter:brightness(1.1); outline:2px solid rgba(255,255,255,.72); outline-offset:3px; }
+    .run:disabled { opacity:.44; cursor:wait; transform:none; filter:grayscale(.35); box-shadow:none; }
+    .run-icon { display:grid; place-items:center; width:29px; height:29px; border-radius:7px; color:#ef233c; background:#fff; font-size:13px; }
+    .hint { margin:12px 0 0; color:rgba(255,255,255,.42); font-size:10px; line-height:1.65; text-align:center; }
+    .contact { direction:ltr; display:flex; align-items:center; justify-content:center; gap:9px; margin-top:15px; color:#fff; font-size:14px; font-weight:950; letter-spacing:1.2px; text-decoration:none; }
+    .contact:before { content:"CALL"; padding:4px 6px; border-radius:4px; color:#ef233c; background:#fff; font-size:8px; letter-spacing:1px; }
+    footer { direction:ltr; padding:16px 22px 20px; color:rgba(255,255,255,.35); text-align:center; font-size:9px; letter-spacing:1.8px; text-transform:uppercase; }
+    @media(max-width:800px){ header{padding:17px 18px}.console{grid-template-columns:1fr;max-width:620px}.intro{padding:34px 26px 27px;border-left:0;border-bottom:1px solid rgba(255,255,255,.09)}.module{padding:27px 24px 30px}h1{font-size:54px}.features{margin-top:19px}.shell:after{width:480px;height:480px}.lede{margin:17px 0 20px} }
+    @media(max-width:480px){ .brand-copy small{display:none}.brand-copy strong{font-size:15px}.brand-logo{width:44px;height:44px}.version-chip{padding:7px 9px;font-size:9px}.console{border-radius:19px}.intro{padding:29px 19px 22px}h1{font-size:46px}.lede{font-size:14px}.features{grid-template-columns:1fr}.feature{min-height:0}.module{padding:23px 18px 26px}.firmwares span{font-size:10px}.run{padding:15px 16px}.ambient-copy{display:none} }
+    @media(max-height:760px) and (min-width:801px){ header{padding-top:14px;padding-bottom:14px}main{padding-top:18px;padding-bottom:18px}.intro{padding-top:32px;padding-bottom:31px}.module{padding-top:27px;padding-bottom:27px}.lede{margin-top:14px;margin-bottom:17px;line-height:1.65}.feature{min-height:68px}.hint{margin-top:8px}footer{padding-top:8px;padding-bottom:12px} }
+    @media(prefers-reduced-motion:reduce){.run{transition:none}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="ambient-copy" aria-hidden="true"><strong>HAZZAZ STORE</strong><span>الثقة • الأمانة</span></div>
+  <header>
+    <a class="brand" href="./" aria-label="Hazzaz Store home"><img class="brand-logo" src="./hazzaz-logo-red.jpg" alt="شعار Hazzaz Store"><span class="brand-copy"><strong><span>HAZZAZ</span> STORE</strong><small>الثقة • الأمانة</small></span></a>
+    <div class="top-meta"><span class="live-dot" aria-hidden="true"></span><span class="version-chip">PS4 • 13.XX</span></div>
+  </header>
+  <main>
+    <section class="console" aria-labelledby="title">
+      <div class="intro">
+        <p class="kicker">Hazzaz Store // Play More</p>
+        <h1 id="title"><span>HAZZAZ STORE</span>الثقة والأمانة</h1>
+        <p class="lede">تهكير وتنزيل ألعاب وصيانة أجهزة PlayStation بخدمة سريعة وواضحة من <strong>هزاز ستور.</strong></p>
+        <div class="features" aria-label="مزايا الخدمة">
+          <div class="feature"><b>تهكير احترافي</b><small>حلول واضحة للإصدارات المدعومة.</small></div>
+          <div class="feature"><b>تنزيل ألعاب</b><small>تجهيز جهازك بالألعاب التي تحبها.</small></div>
+          <div class="feature"><b>صيانة متخصصة</b><small>PS3 • PS4 • PS5 في مكان واحد.</small></div>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-label"><span>SUPPORTED FIRMWARE</span><b>READY</b></div>
+        <div class="firmwares" aria-label="الإصدارات المدعومة"><span>13.02</span><span>13.04</span><span>13.50</span><span>13.52</span></div>
+        <div class="status-card" aria-live="polite"><div id="state">جارٍ التحقق من إصدار النظام...</div><div id="det"></div><div id="cache">جارٍ فحص ملفات التشغيل...</div></div>
+        <button class="run" id="run" type="button" disabled><span id="run-label">انتظر قليلًا</span><span class="run-icon">▶</span></button>
+        <p class="hint">عند ظهور «جاهز للتشغيل» اضغط زر X. لا تغلق الصفحة أثناء التحميل.</p>
+        <a class="contact" href="tel:0917777697" aria-label="اتصل بمتجر Hazzaz Store على الرقم 0917777697">0917777697</a>
+      </div>
+    </section>
+  </main>
+  <footer>Hazzaz Store • الثقة والأمانة • Interface for Hazzaz Store • Core by RAW GAME</footer>
+</div>
+<script>
+(function(){
+  var stateEl=document.getElementById("state"),detEl=document.getElementById("det"),cacheEl=document.getElementById("cache"),runEl=document.getElementById("run"),runLabelEl=document.getElementById("run-label");
+  var params=new URLSearchParams(location.search),action=null,launched=false;
+  function setState(t,c){stateEl.textContent=t;stateEl.className=c||""} function setCache(t,ok){cacheEl.textContent=t;cacheEl.className=ok?"cacheok":""}
+  function arm(label,fn){action=fn;runLabelEl.textContent=label;runEl.disabled=false;try{runEl.focus()}catch(e){}} function disarm(label){action=null;runLabelEl.textContent=label;runEl.disabled=true}
+  function fire(){if(!action||launched)return;var fn=action;launched=true;disarm("جارٍ التشغيل...");fn()} runEl.addEventListener("click",fire,false);window.addEventListener("keydown",function(e){if(!runEl.disabled&&(!e||e.keyCode===13||e.keyCode===32))fire()},false);
+  var SUPPORTED={1302:1,1304:1,1350:1,1352:1},key=null,fwnum=null,m=/PlayStation\s+4[\/ ](\d+)\.(\d+)/.exec(navigator.userAgent);
+  if(m){var ms=parseInt(m[2],16).toString(16);if(ms.length<2)ms="0"+ms;key=m[1]+"."+ms;fwnum=parseInt(m[1],10)*100+parseInt(ms,10)}
+  var forced=params.get("force")==="1",supported=forced||(fwnum!==null&&SUPPORTED[fwnum]===1);detEl.innerHTML="FIRMWARE <b>"+(key||"UNKNOWN")+"</b>"+(supported?" &nbsp;•&nbsp; <b>SUPPORTED</b>":" &nbsp;•&nbsp; NOT IN KERNEL TABLE");
+  var target="jb.html"+location.search;function go(){setState("جارٍ تشغيل HEN... لا تغلق الصفحة","warn");location.replace(target)} function ready(t){setState(t||"جاهز للتشغيل","ok");arm("تشغيل الآن",go)}
+  if(!supported){setState("هذا الإصدار غير مدعوم رسميًا","bad");setCache("يمكن المتابعة يدويًا، لكن قد تفشل العملية أو يطلب الجهاز إعادة تشغيل.",false);arm("تشغيل على أي حال",go);return}
+  setState("الإصدار مدعوم — جارٍ تجهيز الملفات","ok");var ac=window.applicationCache;
+  if(!ac||!document.documentElement.hasAttribute("manifest")){setCache("التخزين دون اتصال غير متاح في هذا المتصفح.",false);ready("جاهز للتشغيل عبر الإنترنت")}
+  else if(!navigator.onLine){setCache("وضع دون اتصال — الملفات محفوظة",true);ready("جاهز للتشغيل دون اتصال")}
+  else if(ac.status===ac.IDLE){setCache("الملفات محفوظة — جاهز دون اتصال",true);ready("جاهز للتشغيل")}
+  else if(ac.status===ac.UPDATEREADY){try{ac.swapCache()}catch(e){}setState("يتوفر تحديث جديد","warn");setCache("تم تنزيل التحديث. أعد تحميل الصفحة قبل التشغيل.",true);arm("تحديث ثم تشغيل",function(){location.reload()})}
+  else{disarm("جارٍ حفظ الملفات...");setCache("جارٍ فحص التخزين دون اتصال...");ac.addEventListener("downloading",function(){setCache("جارٍ حفظ ملفات التشغيل لأول مرة...")},false);ac.addEventListener("progress",function(e){if(e&&e.total)setCache("جارٍ حفظ الملفات "+Math.round(e.loaded/e.total*100)+"%")},false);ac.addEventListener("cached",function(){setCache("تم حفظ الملفات — يمكنك الاستخدام دون اتصال",true);ready("اكتمل التجهيز — جاهز للتشغيل")},false);ac.addEventListener("updateready",function(){try{ac.swapCache()}catch(e){}setState("يتوفر تحديث جديد","warn");setCache("تم تنزيل التحديث. أعد تحميل الصفحة قبل التشغيل.",true);arm("تحديث ثم تشغيل",function(){location.reload()})},false);ac.addEventListener("noupdate",function(){setCache("الملفات محفوظة — جاهز دون اتصال",true);ready("جاهز للتشغيل")},false);ac.addEventListener("error",function(){setState("تعذر حفظ نسخة دون اتصال","warn");setCache("أبقِ الإنترنت متصلًا ثم يمكنك المتابعة.",false);arm("تشغيل الآن",go)},false);ac.addEventListener("obsolete",function(){setState("ذاكرة التخزين بحاجة إلى تحديث","warn");setCache("يمكن المتابعة الآن وإعادة المحاولة لاحقًا.",false);arm("تشغيل الآن",go)},false)}
+})();
+</script>
+</body>
+</html>
