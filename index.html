@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#08090c">
-  <meta name="site-version" content="hazzaz-ps4-13xx-v1">
+  <meta name="site-version" content="hazzaz-store-v2">
   <meta name="source-revision" content="raw13g/401f6cc0c27d5ec69f56e7aa740158cd4189c41d">
   <title>Hazzaz Store | PS4 13.XX Host</title>
   <meta name="description" content="واجهة Hazzaz Store لتشغيل PS4 HEN على الإصدارات 13.02 و13.04 و13.50 و13.52.">
@@ -31,18 +31,9 @@
     .ambient-copy { direction:ltr; position:absolute; z-index:-1; right:-2vw; bottom:4vh; left:-2vw; transform:rotate(-4deg); color:rgba(255,255,255,.025); text-align:center; white-space:nowrap; pointer-events:none; user-select:none; }
     .ambient-copy strong { display:block; font-size:clamp(78px,13vw,190px); line-height:.72; letter-spacing:-7px; }
     .ambient-copy span { display:block; margin-top:18px; color:rgba(239,35,60,.055); font-size:clamp(26px,5vw,72px); font-weight:950; letter-spacing:6px; }
-    .console { width:min(1050px,100%); display:grid; grid-template-columns:minmax(0,1.12fr) minmax(340px,.88fr); border:1px solid rgba(255,255,255,.12); border-radius:28px; overflow:hidden; background:rgba(13,15,20,.86); box-shadow:0 34px 100px rgba(0,0,0,.52); }
-    .intro { position:relative; overflow:hidden; padding:48px 50px 44px; border-left:1px solid rgba(255,255,255,.09); }
-    .intro:after { content:""; position:absolute; width:330px; height:330px; left:-85px; bottom:-95px; z-index:-1; border-radius:50%; background:url("./hazzaz-logo-red.jpg") center/cover no-repeat; opacity:.07; filter:grayscale(.15); pointer-events:none; }
-    .kicker { direction:ltr; margin:0 0 16px; color:#ef233c; font-size:11px; font-weight:950; letter-spacing:2.8px; text-transform:uppercase; }
-    h1 { margin:0; font-size:clamp(45px,7vw,76px); line-height:.93; letter-spacing:-3px; font-weight:950; }
-    h1 span { display:block; color:transparent; -webkit-text-stroke:1px rgba(255,255,255,.72); font-size:.52em; letter-spacing:7px; margin-bottom:9px; }
-    .lede { max-width:570px; margin:22px 0 26px; color:#c9cdd5; font-size:16px; font-weight:700; line-height:1.9; }
-    .lede strong { color:#fff; font-weight:950; }
-    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:25px; }
-    .feature { min-height:82px; padding:14px 12px; border:1px solid rgba(255,255,255,.08); border-radius:12px; background:rgba(255,255,255,.025); }
-    .feature b { display:block; color:#fff; font-size:13px; }
-    .feature small { display:block; margin-top:7px; color:rgba(255,255,255,.45); font-size:10px; line-height:1.5; }
+    .console { width:min(1260px,100%); display:grid; grid-template-columns:minmax(0,1.55fr) minmax(330px,.65fr); border:1px solid rgba(255,255,255,.12); border-radius:28px; overflow:hidden; background:rgba(13,15,20,.86); box-shadow:0 34px 100px rgba(0,0,0,.52); }
+    .showcase { display:grid; place-items:center; min-width:0; padding:10px; border-left:1px solid rgba(255,255,255,.09); background:#050608; }
+    .showcase img { display:block; width:100%; height:auto; border-radius:18px; object-fit:contain; }
     .module { position:relative; display:flex; flex-direction:column; justify-content:center; padding:40px 34px; background:linear-gradient(160deg,rgba(239,35,60,.07),transparent 42%); }
     .module-label { direction:ltr; display:flex; align-items:center; justify-content:space-between; margin-bottom:13px; color:rgba(255,255,255,.47); font-size:10px; font-weight:900; letter-spacing:2px; }
     .module-label b { color:#ef233c; }
@@ -63,9 +54,9 @@
     .contact { direction:ltr; display:flex; align-items:center; justify-content:center; gap:9px; margin-top:15px; color:#fff; font-size:14px; font-weight:950; letter-spacing:1.2px; text-decoration:none; }
     .contact:before { content:"CALL"; padding:4px 6px; border-radius:4px; color:#ef233c; background:#fff; font-size:8px; letter-spacing:1px; }
     footer { direction:ltr; padding:16px 22px 20px; color:rgba(255,255,255,.35); text-align:center; font-size:9px; letter-spacing:1.8px; text-transform:uppercase; }
-    @media(max-width:800px){ header{padding:17px 18px}.console{grid-template-columns:1fr;max-width:620px}.intro{padding:34px 26px 27px;border-left:0;border-bottom:1px solid rgba(255,255,255,.09)}.module{padding:27px 24px 30px}h1{font-size:54px}.features{margin-top:19px}.shell:after{width:480px;height:480px}.lede{margin:17px 0 20px} }
-    @media(max-width:480px){ .brand-copy small{display:none}.brand-copy strong{font-size:15px}.brand-logo{width:44px;height:44px}.version-chip{padding:7px 9px;font-size:9px}.console{border-radius:19px}.intro{padding:29px 19px 22px}h1{font-size:46px}.lede{font-size:14px}.features{grid-template-columns:1fr}.feature{min-height:0}.module{padding:23px 18px 26px}.firmwares span{font-size:10px}.run{padding:15px 16px}.ambient-copy{display:none} }
-    @media(max-height:760px) and (min-width:801px){ header{padding-top:14px;padding-bottom:14px}main{padding-top:18px;padding-bottom:18px}.intro{padding-top:32px;padding-bottom:31px}.module{padding-top:27px;padding-bottom:27px}.lede{margin-top:14px;margin-bottom:17px;line-height:1.65}.feature{min-height:68px}.hint{margin-top:8px}footer{padding-top:8px;padding-bottom:12px} }
+    @media(max-width:800px){ header{padding:17px 18px}.console{grid-template-columns:1fr;max-width:720px}.showcase{padding:7px;border-left:0;border-bottom:1px solid rgba(255,255,255,.09)}.showcase img{border-radius:14px}.module{padding:27px 24px 30px}.shell:after{width:480px;height:480px} }
+    @media(max-width:480px){ .brand-copy small{display:none}.brand-copy strong{font-size:15px}.brand-logo{width:44px;height:44px}.version-chip{padding:7px 9px;font-size:9px}.console{border-radius:19px}.showcase{padding:4px}.showcase img{border-radius:13px}.module{padding:23px 18px 26px}.firmwares span{font-size:10px}.run{padding:15px 16px}.ambient-copy{display:none} }
+    @media(max-height:760px) and (min-width:801px){ header{padding-top:14px;padding-bottom:14px}main{padding-top:18px;padding-bottom:18px}.module{padding-top:27px;padding-bottom:27px}.hint{margin-top:8px}footer{padding-top:8px;padding-bottom:12px} }
     @media(prefers-reduced-motion:reduce){.run{transition:none}}
   </style>
 </head>
@@ -77,16 +68,9 @@
     <div class="top-meta"><span class="live-dot" aria-hidden="true"></span><span class="version-chip">PS4 • 13.XX</span></div>
   </header>
   <main>
-    <section class="console" aria-labelledby="title">
-      <div class="intro">
-        <p class="kicker">Hazzaz Store // Play More</p>
-        <h1 id="title"><span>HAZZAZ STORE</span>الثقة والأمانة</h1>
-        <p class="lede">تهكير وتنزيل ألعاب وصيانة أجهزة PlayStation بخدمة سريعة وواضحة من <strong>هزاز ستور.</strong></p>
-        <div class="features" aria-label="مزايا الخدمة">
-          <div class="feature"><b>تهكير احترافي</b><small>حلول واضحة للإصدارات المدعومة.</small></div>
-          <div class="feature"><b>تنزيل ألعاب</b><small>تجهيز جهازك بالألعاب التي تحبها.</small></div>
-          <div class="feature"><b>صيانة متخصصة</b><small>PS3 • PS4 • PS5 في مكان واحد.</small></div>
-        </div>
+    <section class="console" aria-label="Hazzaz Store وتشغيل الإصدارات المدعومة">
+      <div class="showcase">
+        <img src="./hazzaz-store-banner.jpg" alt="إعلان Hazzaz Store لصيانة وتعديل وتنزيل ألعاب أجهزة PlayStation">
       </div>
       <div class="module">
         <div class="module-label"><span>SUPPORTED FIRMWARE</span><b>READY</b></div>
