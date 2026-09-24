@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ar" dir="rtl" manifest="700.manifest">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#08090c">
+  <title>Hazzaz Store | تثبيت ملفات PS4</title>
+  <style>
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Tahoma,sans-serif}body{color:#f5f7fa;background:#08090c}
+    .shell{min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:28px;position:relative;overflow:hidden;background:radial-gradient(circle at 18% 28%,rgba(239,35,60,.20),transparent 27%),radial-gradient(circle at 82% 74%,rgba(239,35,60,.12),transparent 30%),linear-gradient(135deg,#08090c,#101218)}
+    .shell:before{content:"HAZZAZ STORE";position:absolute;left:50%;bottom:4%;transform:translateX(-50%) rotate(-4deg);color:rgba(255,255,255,.025);font-size:clamp(72px,13vw,180px);font-weight:950;white-space:nowrap;letter-spacing:-6px}
+    .console{position:relative;width:min(1180px,100%);display:grid;grid-template-columns:minmax(0,1.45fr) minmax(330px,.72fr);overflow:hidden;border:1px solid rgba(255,255,255,.12);border-radius:28px;background:rgba(13,15,20,.90);box-shadow:0 34px 100px rgba(0,0,0,.55)}
+    .showcase{display:grid;place-items:center;padding:8px;border-left:1px solid rgba(255,255,255,.09);background:#050608}.showcase img{display:block;width:100%;height:auto;border-radius:18px;object-fit:contain}
+    .module{display:flex;flex-direction:column;justify-content:center;padding:36px 30px;background:linear-gradient(160deg,rgba(239,35,60,.09),transparent 48%);text-align:center}
+    .brand{direction:ltr;display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:22px}.brand img{width:54px;height:54px;padding:2px;border:1px solid #ef233c;border-radius:50%;object-fit:cover;box-shadow:0 0 28px rgba(239,35,60,.26)}.brand strong{font-size:19px;letter-spacing:1.8px}.brand strong span{color:#ef233c}.brand small{display:block;margin-top:5px;color:rgba(255,255,255,.43);font-size:9px;letter-spacing:3px}
+    .tag{display:inline-block;align-self:center;margin-bottom:12px;padding:7px 11px;border:1px solid rgba(239,35,60,.34);border-radius:7px;color:#ff697c;background:rgba(239,35,60,.07);font-size:10px;font-weight:900;letter-spacing:1px}h1{margin:0 0 12px;font-size:32px}#msgs{min-height:72px;margin:0;color:#e4e6eb;font-size:16px;font-weight:850;line-height:1.8}.ok{color:#8ce99a!important}.bad{color:#ff6b7a!important}
+    .track{height:11px;margin:22px 0 10px;overflow:hidden;border-radius:999px;background:rgba(255,255,255,.08)}#bar{width:4%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#b9162a,#ef233c,#ff7183);box-shadow:0 0 22px rgba(239,35,60,.38);transition:width .2s ease}.percent{direction:ltr;color:rgba(255,255,255,.47);font-size:11px;font-weight:900}
+    button{width:100%;margin-top:22px;padding:16px;border:0;border-radius:11px;color:#fff;background:linear-gradient(100deg,#b9162a,#ef233c);font-size:16px;font-weight:950;cursor:pointer;box-shadow:0 16px 38px rgba(239,35,60,.22)}button:disabled{opacity:.42;cursor:wait;box-shadow:none}.note{margin:13px 0 0;color:rgba(255,255,255,.42);font-size:10px;line-height:1.7}
+    @media(max-width:800px){.shell{padding:18px}.console{grid-template-columns:1fr;border-radius:20px}.showcase{padding:5px;border-left:0;border-bottom:1px solid rgba(255,255,255,.09)}.showcase img{border-radius:14px}.module{padding:27px 20px 30px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="console">
+      <div class="showcase"><img src="./hazzaz-store-banner.jpg" alt="إعلان Hazzaz Store"></div>
+      <div class="module">
+        <div class="brand"><img src="./hazzaz-logo-red.jpg" alt="شعار Hazzaz Store"><span><strong><span>HAZZAZ</span> STORE</strong><small>الثقة • الأمانة</small></span></div>
+        <span class="tag">7.00–8.52</span>
+        <h1>تثبيت ملفات إصدارك</h1>
+        <p id="msgs">جارٍ بدء التخزين دون اتصال…</p>
+        <div class="track" aria-hidden="true"><div id="bar"></div></div>
+        <div class="percent" id="percent">0%</div>
+        <button id="go" type="button" disabled>جارٍ التثبيت…</button>
+        <p class="note">أبقِ الصفحة مفتوحة والإنترنت متصلًا حتى يكتمل التثبيت.</p>
+      </div>
+    </section>
+  </main>
+  <script>
+  (function(){
+    var msgs=document.getElementById("msgs"),bar=document.getElementById("bar"),percent=document.getElementById("percent"),go=document.getElementById("go"),ac=window.applicationCache,finished=false;
+    try{history.replaceState(null,null,"index.html")}catch(e){}
+    function progress(e){var p=e&&e.total?Math.round(e.loaded/e.total*100):0;if(p>0){bar.style.width=p+"%";percent.textContent=p+"%";msgs.textContent="جارٍ حفظ ملفات التشغيل…"}}
+    function done(){if(finished)return;finished=true;try{if(ac.status===ac.UPDATEREADY)ac.swapCache()}catch(e){}try{localStorage.setItem("multifw-cache-v1","1")}catch(e){}bar.style.width="100%";percent.textContent="100%";msgs.textContent="تم حفظ الملفات بنجاح — يمكنك الآن تشغيل GoldHEN";msgs.className="ok";go.disabled=false;go.textContent="العودة إلى التشغيل"}
+    function failed(){msgs.textContent="تعذر تثبيت الملفات. امسح بيانات متصفح PS4 ثم أعد المحاولة.";msgs.className="bad";go.disabled=false;go.textContent="إعادة المحاولة";go.onclick=function(){location.reload()}}
+    go.onclick=function(){location.replace("index.html")};
+    if(!ac){failed();return}ac.addEventListener("progress",progress,false);ac.addEventListener("cached",done,false);ac.addEventListener("updateready",done,false);ac.addEventListener("noupdate",done,false);ac.addEventListener("error",failed,false);
+    setTimeout(function(){if(ac.status===ac.IDLE||ac.status===ac.UPDATEREADY)done()},700);
+  })();
+  </script>
+</body>
+</html>

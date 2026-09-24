@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="ar" dir="rtl" manifest="cache.appcache">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#08090c">
-  <meta name="site-version" content="hazzaz-store-v2">
-  <meta name="source-revision" content="raw13g/ef1670a8db0beb49b942dfacced6edbc5225f47c">
-  <title>Hazzaz Store | PS4 13.XX Host</title>
-  <meta name="description" content="واجهة Hazzaz Store لتشغيل PS4 HEN على الإصدارات 13.02 و13.04 و13.50 و13.52.">
+  <meta name="site-version" content="hazzaz-store-multifw-v3">
+  <meta name="source-revision" content="gamerhack/g2all-2026-09-23">
+  <title>Hazzaz Store | PS4 7.00–13.52 Host</title>
+  <meta name="description" content="واجهة Hazzaz Store لتشغيل GoldHEN على إصدارات PS4 المدعومة من 7.00 إلى 13.52.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%2308090c'/%3E%3Cpath d='M16 14v36M48 14v36M16 32h32' stroke='%23ef233c' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
   <style>
     * { box-sizing: border-box; }
@@ -37,14 +37,15 @@
     .module { position:relative; display:flex; flex-direction:column; justify-content:center; padding:40px 34px; background:linear-gradient(160deg,rgba(239,35,60,.07),transparent 42%); }
     .module-label { direction:ltr; display:flex; align-items:center; justify-content:space-between; margin-bottom:13px; color:rgba(255,255,255,.47); font-size:10px; font-weight:900; letter-spacing:2px; }
     .module-label b { color:#ef233c; }
-    .firmwares { direction:ltr; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:13px; }
+    .firmwares { direction:ltr; display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:13px; }
     .firmwares span { padding:8px 4px; border:1px solid rgba(255,255,255,.09); border-radius:7px; color:#dfe2e8; background:rgba(0,0,0,.22); text-align:center; font-size:11px; font-weight:900; }
     .status-card { padding:17px 16px; border:1px solid rgba(239,35,60,.24); border-radius:13px; background:rgba(0,0,0,.29); box-shadow:inset 3px 0 #ef233c; }
-    #state { min-height:24px; color:#fff; font-size:16px; font-weight:950; }
+    #msgs { min-height:24px; color:#fff; font-size:16px; font-weight:950; }
     #det { direction:ltr; margin-top:6px; color:rgba(255,255,255,.48); font-size:10px; letter-spacing:.45px; }
     #det b { color:#fff; }
     #cache { min-height:17px; margin-top:7px; color:rgba(255,255,255,.44); font-size:10px; font-weight:700; }
     #cache.cacheok { color:#8ce99a; }
+    #state,#out { display:none; }
     .ok { color:#8ce99a!important; }.bad{color:#ff6b7a!important}.warn{color:#ffd166!important}
     .run { direction:ltr; width:100%; display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:14px; padding:17px 18px; border:0; border-radius:11px; color:#fff; background:linear-gradient(100deg,#b9162a,#ef233c); font-size:17px; font-weight:950; letter-spacing:.6px; cursor:pointer; box-shadow:0 16px 38px rgba(239,35,60,.22); transition:transform .18s ease,filter .18s ease,opacity .18s ease; }
     .run:hover,.run:focus { transform:translateY(-2px); filter:brightness(1.1); outline:2px solid rgba(255,255,255,.72); outline-offset:3px; }
@@ -65,7 +66,7 @@
   <div class="ambient-copy" aria-hidden="true"><strong>HAZZAZ STORE</strong><span>الثقة • الأمانة</span></div>
   <header>
     <a class="brand" href="./" aria-label="Hazzaz Store home"><img class="brand-logo" src="./hazzaz-logo-red.jpg" alt="شعار Hazzaz Store"><span class="brand-copy"><strong><span>HAZZAZ</span> STORE</strong><small>الثقة • الأمانة</small></span></a>
-    <div class="top-meta"><span class="live-dot" aria-hidden="true"></span><span class="version-chip">PS4 • 13.XX</span></div>
+    <div class="top-meta"><span class="live-dot" aria-hidden="true"></span><span class="version-chip">PS4 • 7.00–13.52</span></div>
   </header>
   <main>
     <section class="console" aria-label="Hazzaz Store وتشغيل الإصدارات المدعومة">
@@ -74,34 +75,47 @@
       </div>
       <div class="module">
         <div class="module-label"><span>SUPPORTED FIRMWARE</span><b>READY</b></div>
-        <div class="firmwares" aria-label="الإصدارات المدعومة"><span>13.02</span><span>13.04</span><span>13.50</span><span>13.52</span></div>
-        <div class="status-card" aria-live="polite"><div id="state">جارٍ التحقق من إصدار النظام...</div><div id="det"></div><div id="cache">جارٍ فحص ملفات التشغيل...</div></div>
+        <div class="firmwares" aria-label="الإصدارات المدعومة"><span>7.00–8.52</span><span>9.00–9.60</span><span>10.00–11.02</span><span>11.50–12.02</span><span>12.50–13.00</span><span>13.02–13.52</span></div>
+        <div class="status-card" aria-live="polite"><div id="msgs">جارٍ التحقق من إصدار النظام...</div><div id="det"></div><div id="cache">جارٍ فحص ملفات التشغيل...</div><div id="state"></div><pre id="out"></pre></div>
         <button class="run" id="run" type="button" disabled><span id="run-label">انتظر قليلًا</span><span class="run-icon">▶</span></button>
-        <p class="hint">عند ظهور «جاهز للتشغيل» اضغط زر X. لا تغلق الصفحة أثناء التحميل.</p>
+        <p class="hint">اضغط زر X بعد ظهور «جاهز». في أول زيارة سيتم حفظ ملفات إصدارك للاستخدام دون اتصال.</p>
         <a class="contact" href="tel:0917777697" aria-label="اتصل بمتجر Hazzaz Store على الرقم 0917777697">0917777697</a>
       </div>
     </section>
   </main>
-  <footer>Hazzaz Store • الثقة والأمانة • Interface for Hazzaz Store • Core by RAW GAME</footer>
+  <footer>Hazzaz Store • الثقة والأمانة • Engine: GamerHack / PSFree / GoldHEN contributors</footer>
 </div>
 <script>
 (function(){
-  var stateEl=document.getElementById("state"),detEl=document.getElementById("det"),cacheEl=document.getElementById("cache"),runEl=document.getElementById("run"),runLabelEl=document.getElementById("run-label");
-  var params=new URLSearchParams(location.search),action=null,launched=false;
-  function setState(t,c){stateEl.textContent=t;stateEl.className=c||""} function setCache(t,ok){cacheEl.textContent=t;cacheEl.className=ok?"cacheok":""}
-  function arm(label,fn){action=fn;runLabelEl.textContent=label;runEl.disabled=false;try{runEl.focus()}catch(e){}} function disarm(label){action=null;runLabelEl.textContent=label;runEl.disabled=true}
-  function fire(){if(!action||launched)return;var fn=action;launched=true;disarm("جارٍ التشغيل...");fn()} runEl.addEventListener("click",fire,false);window.addEventListener("keydown",function(e){if(!runEl.disabled&&(!e||e.keyCode===13||e.keyCode===32))fire()},false);
-  var SUPPORTED={1302:1,1304:1,1350:1,1352:1},key=null,fwnum=null,m=/PlayStation\s+4[\/ ](\d+)\.(\d+)/.exec(navigator.userAgent);
-  if(m){var ms=parseInt(m[2],16).toString(16);if(ms.length<2)ms="0"+ms;key=m[1]+"."+ms;fwnum=parseInt(m[1],10)*100+parseInt(ms,10)}
-  var forced=params.get("force")==="1",supported=forced||(fwnum!==null&&SUPPORTED[fwnum]===1);detEl.innerHTML="FIRMWARE <b>"+(key||"UNKNOWN")+"</b>"+(supported?" &nbsp;•&nbsp; <b>SUPPORTED</b>":" &nbsp;•&nbsp; NOT IN KERNEL TABLE");
-  var target="jb.html"+location.search;function go(){setState("جارٍ تشغيل HEN... لا تغلق الصفحة","warn");location.replace(target)} function ready(t){setState(t||"جاهز للتشغيل","ok");arm("تشغيل الآن",go)}
-  if(!supported){setState("هذا الإصدار غير مدعوم رسميًا","bad");setCache("يمكن المتابعة يدويًا، لكن قد تفشل العملية أو يطلب الجهاز إعادة تشغيل.",false);arm("تشغيل على أي حال",go);return}
-  setState("الإصدار مدعوم — جارٍ تجهيز الملفات","ok");var ac=window.applicationCache;
-  if(!ac||!document.documentElement.hasAttribute("manifest")){setCache("التخزين دون اتصال غير متاح في هذا المتصفح.",false);ready("جاهز للتشغيل عبر الإنترنت")}
-  else if(!navigator.onLine){setCache("وضع دون اتصال — الملفات محفوظة",true);ready("جاهز للتشغيل دون اتصال")}
-  else if(ac.status===ac.IDLE){setCache("الملفات محفوظة — جاهز دون اتصال",true);ready("جاهز للتشغيل")}
-  else if(ac.status===ac.UPDATEREADY){try{ac.swapCache()}catch(e){}setState("يتوفر تحديث جديد","warn");setCache("تم تنزيل التحديث. أعد تحميل الصفحة قبل التشغيل.",true);arm("تحديث ثم تشغيل",function(){location.reload()})}
-  else{disarm("جارٍ حفظ الملفات...");setCache("جارٍ فحص التخزين دون اتصال...");ac.addEventListener("downloading",function(){setCache("جارٍ حفظ ملفات التشغيل لأول مرة...")},false);ac.addEventListener("progress",function(e){if(e&&e.total)setCache("جارٍ حفظ الملفات "+Math.round(e.loaded/e.total*100)+"%")},false);ac.addEventListener("cached",function(){setCache("تم حفظ الملفات — يمكنك الاستخدام دون اتصال",true);ready("اكتمل التجهيز — جاهز للتشغيل")},false);ac.addEventListener("updateready",function(){try{ac.swapCache()}catch(e){}setState("يتوفر تحديث جديد","warn");setCache("تم تنزيل التحديث. أعد تحميل الصفحة قبل التشغيل.",true);arm("تحديث ثم تشغيل",function(){location.reload()})},false);ac.addEventListener("noupdate",function(){setCache("الملفات محفوظة — جاهز دون اتصال",true);ready("جاهز للتشغيل")},false);ac.addEventListener("error",function(){setState("تعذر حفظ نسخة دون اتصال","warn");setCache("أبقِ الإنترنت متصلًا ثم يمكنك المتابعة.",false);arm("تشغيل الآن",go)},false);ac.addEventListener("obsolete",function(){setState("ذاكرة التخزين بحاجة إلى تحديث","warn");setCache("يمكن المتابعة الآن وإعادة المحاولة لاحقًا.",false);arm("تشغيل الآن",go)},false)}
+  var msgsEl=document.getElementById("msgs"),detEl=document.getElementById("det"),cacheEl=document.getElementById("cache"),runEl=document.getElementById("run"),runLabelEl=document.getElementById("run-label"),launched=false;
+  window.msgs=msgsEl;
+  function setMessage(t,c){msgsEl.textContent=t;msgsEl.className=c||""} function setCache(t,ok){cacheEl.textContent=t;cacheEl.className=ok?"cacheok":""}
+  function arm(label){runLabelEl.textContent=label;runEl.disabled=false;try{runEl.focus()}catch(e){}} function disarm(label){runLabelEl.textContent=label;runEl.disabled=true}
+  function routeFor(fw){
+    if(fw>=7.00&&fw<=8.52)return{cache:"cache700.html",src:"700/alert.js",module:true};
+    if(fw>=9.00&&fw<=9.60)return{cache:"cache900.html",src:"900/alert.js",module:true};
+    if(fw>=10.00&&fw<=11.02)return{cache:"cachecss.html",src:"css/main.js",css:true};
+    if(fw>=11.50&&fw<=12.02)return{cache:"cacheslopkit.html",src:"slopkit/chain_lapse.js",module:true};
+    if(fw>=12.50&&fw<=13.00)return{cache:"cacheslopkit.html",src:"slopkit/chain_poops.js",module:true};
+    if(fw>=13.02&&fw<=13.52)return{cache:"cacheslopkit.html",src:"slopkit/jb.js?v=10",module:true};
+    return null;
+  }
+  function loadExploit(route){
+    setMessage("جارٍ تشغيل GoldHEN... لا تغلق الصفحة","warn");setCache("تم اختيار المحرك المناسب لإصدار جهازك.",true);
+    var script=document.createElement("script");if(route.module)script.type="module";script.src=route.src;
+    script.onerror=function(){launched=false;setMessage("تعذر تحميل ملفات التشغيل — امسح بيانات المتصفح وثبّت التخزين من جديد","bad");arm("إعادة المحاولة")};
+    if(route.css)script.onload=function(){setTimeout(function(){doJb()},500)};document.head.appendChild(script);
+  }
+  var match=navigator.userAgent.match(/PlayStation 4[ \/]([\d.]+)/i),firmwareText=match?match[1]:"UNKNOWN",firmware=match?parseFloat(firmwareText):NaN,route=match?routeFor(firmware):null;
+  detEl.innerHTML="FIRMWARE <b>"+firmwareText+"</b>"+(route?" &nbsp;•&nbsp; <b>SUPPORTED</b>":" &nbsp;•&nbsp; UNSUPPORTED");
+  if(!match){setMessage("افتح هذا الرابط من متصفح جهاز PS4","warn");setCache("سيتم اكتشاف الإصدار واختيار المحرك تلقائيًا.",false);disarm("متاح على PS4 فقط");return}
+  if(!route){setMessage("الإصدار "+firmwareText+" غير مدعوم في هذه الحزمة","bad");setCache("النطاقات المدعومة موضحة أعلى الزر.",false);disarm("إصدار غير مدعوم");return}
+  var cacheReady=false;try{cacheReady=localStorage.getItem("multifw-cache-v1")==="1"}catch(e){}
+  setMessage("تم اكتشاف الإصدار "+firmwareText+" — جاهز","ok");
+  if(window.applicationCache&&window.applicationCache.status!==0&&cacheReady){setCache("ملفات إصدارك محفوظة — يمكن التشغيل دون اتصال",true);arm("تشغيل GoldHEN")}
+  else{setCache("يلزم حفظ ملفات إصدارك في الزيارة الأولى.",false);arm("تثبيت الملفات")}
+  function fire(){if(runEl.disabled||launched)return;launched=true;disarm("جارٍ التشغيل...");if(!window.applicationCache||window.applicationCache.status===0||!cacheReady){setMessage("جارٍ فتح صفحة تثبيت ملفات إصدارك...","warn");location.replace(route.cache);return}loadExploit(route)}
+  runEl.addEventListener("click",fire,false);window.addEventListener("keydown",function(e){if(!runEl.disabled&&(!e||e.keyCode===13||e.keyCode===32))fire()},false);
 })();
 </script>
 </body>
