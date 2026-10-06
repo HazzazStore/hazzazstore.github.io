@@ -1,0 +1,99 @@
+name: Sync GoldHEN
+
+on:
+  push:
+    paths:
+      - .github/workflows/sync-goldhen.yml
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Update host files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --depth=1 https://github.com/GameYardPS/GameYardPS.github.io.git /tmp/gameyard
+
+          files=(
+            700/lapse.js
+            700/psfree.js
+            700/kpatch/700.elf
+            700/kpatch/750.elf
+            700/kpatch/800.elf
+            700/kpatch/850.elf
+            900/lapse.js
+            900/psfree.js
+            900/kpatch/900.elf
+            900/kpatch/903.elf
+            900/kpatch/950.elf
+            slopkit/jb.js
+          )
+          for file in "${files[@]}"; do
+            cp "/tmp/gameyard/$file" "$file"
+          done
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          replacements = {
+              "index.html": [
+                  ('content="hazzaz-store-multifw-v3"', 'content="hazzaz-store-multifw-v4"'),
+                  ('content="gamerhack/g2all-2026-09-23"', 'content="gamerhack/g2all-2026-10-06"'),
+                  ('src:"slopkit/jb.js?v=10"', 'src:"slopkit/jb.js?v=19"'),
+                  ('multifw-cache-v1', 'multifw-cache-v2'),
+              ],
+              "700.manifest": [
+                  ('2026-09-24 / 700-v1', '2026-10-06 / 700-v2'),
+              ],
+              "900.manifest": [
+                  ('2026-09-24 / 900-v1', '2026-10-06 / 900-v2'),
+              ],
+              "css.manifest": [
+                  ('2026-09-24 / css-v1', '2026-10-06 / css-v2'),
+              ],
+              "slopkit.manifest": [
+                  ('2026-09-24 / slopkit-v1', '2026-10-06 / slopkit-v2'),
+                  ('slopkit/jb.js?v=10', 'slopkit/jb.js?v=19'),
+              ],
+              "cache.appcache": [
+                  ('multi-firmware v3 / 2026-09-24', 'multi-firmware v4 / 2026-10-06'),
+              ],
+              "cache700.html": [('multifw-cache-v1', 'multifw-cache-v2')],
+              "cache900.html": [('multifw-cache-v1', 'multifw-cache-v2')],
+              "cachecss.html": [('multifw-cache-v1', 'multifw-cache-v2')],
+              "cacheslopkit.html": [('multifw-cache-v1', 'multifw-cache-v2')],
+              "README.md": [
+                  (
+                      '`7a887308ffb539e5d569bd42820da142130fb868`',
+                      '`066f5b456f2fb9da47bfb7f6b9ddc8e599cee30f`\n\n'
+                      'إصدار GoldHEN المضمّن: `v2.4b18.12`، مع محرك التشغيل '
+                      'وملفات الكاش المحدّثة بتاريخ 2026-10-06.',
+                  ),
+              ],
+          }
+
+          for filename, pairs in replacements.items():
+              path = Path(filename)
+              text = path.read_text(encoding="utf-8")
+              for old, new in pairs:
+                  if old not in text:
+                      raise SystemExit(f"Expected text missing in {filename}: {old}")
+                  text = text.replace(old, new, 1)
+              path.write_text(text, encoding="utf-8")
+          PY
+
+          rm -f .github/workflows/sync-goldhen.yml
+          git config user.name "GameYardPS"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "Update GoldHEN host engine and offline cache"
+          git push
