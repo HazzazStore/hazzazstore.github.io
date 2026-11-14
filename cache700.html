@@ -19,33 +19,23 @@
     @media(max-width:800px){.shell{padding:18px}.console{grid-template-columns:1fr;border-radius:20px}.showcase{padding:5px;border-left:0;border-bottom:1px solid rgba(255,255,255,.09)}.showcase img{border-radius:14px}.module{padding:27px 20px 30px}}
   </style>
 </head>
-<body>
+<body data-cache-group="700">
   <main class="shell">
     <section class="console">
       <div class="showcase"><img src="./hazzaz-store-banner.jpg" alt="إعلان Hazzaz Store"></div>
       <div class="module">
         <div class="brand"><img src="./hazzaz-logo-red.jpg" alt="شعار Hazzaz Store"><span><strong><span>HAZZAZ</span> STORE</strong><small>الثقة • الأمانة</small></span></div>
         <span class="tag">7.00–8.52</span>
-        <h1>تثبيت ملفات إصدارك</h1>
+        <h1>حفظ الملفات تلقائيًا</h1>
         <p id="msgs">جارٍ بدء التخزين دون اتصال…</p>
         <div class="track" aria-hidden="true"><div id="bar"></div></div>
         <div class="percent" id="percent">0%</div>
-        <button id="go" type="button" disabled>جارٍ التثبيت…</button>
+        <button id="go" type="button" hidden>إعادة المحاولة</button>
         <p class="note">أبقِ الصفحة مفتوحة والإنترنت متصلًا حتى يكتمل التثبيت.</p>
       </div>
     </section>
   </main>
-  <script>
-  (function(){
-    var msgs=document.getElementById("msgs"),bar=document.getElementById("bar"),percent=document.getElementById("percent"),go=document.getElementById("go"),ac=window.applicationCache,finished=false;
-    try{history.replaceState(null,null,"index.html")}catch(e){}
-    function progress(e){var p=e&&e.total?Math.round(e.loaded/e.total*100):0;if(p>0){bar.style.width=p+"%";percent.textContent=p+"%";msgs.textContent="جارٍ حفظ ملفات التشغيل…"}}
-    function done(){if(finished)return;finished=true;try{if(ac.status===ac.UPDATEREADY)ac.swapCache()}catch(e){}try{localStorage.setItem("multifw-cache-v2","1")}catch(e){}bar.style.width="100%";percent.textContent="100%";msgs.textContent="تم حفظ الملفات بنجاح — يمكنك الآن تشغيل GoldHEN";msgs.className="ok";go.disabled=false;go.textContent="العودة إلى التشغيل"}
-    function failed(){msgs.textContent="تعذر تثبيت الملفات. امسح بيانات متصفح PS4 ثم أعد المحاولة.";msgs.className="bad";go.disabled=false;go.textContent="إعادة المحاولة";go.onclick=function(){location.reload()}}
-    go.onclick=function(){location.replace("index.html")};
-    if(!ac){failed();return}ac.addEventListener("progress",progress,false);ac.addEventListener("cached",done,false);ac.addEventListener("updateready",done,false);ac.addEventListener("noupdate",done,false);ac.addEventListener("error",failed,false);
-    setTimeout(function(){if(ac.status===ac.IDLE||ac.status===ac.UPDATEREADY)done()},700);
-  })();
-  </script>
+  <script src="auto-cache.js"></script>
+  <script src="cache-flow.js"></script>
 </body>
 </html>

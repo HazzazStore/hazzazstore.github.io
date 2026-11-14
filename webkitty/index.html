@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ar" dir="rtl" manifest="cache.appcache">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#08090c">
+  <title>Hazzaz Store | GoldHEN 14.02</title>
+  <style>
+    *{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:#08090c;color:#f5f7fa;font-family:Arial,Tahoma,sans-serif}.shell{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 20% 30%,#40101b,transparent 45%)}.console{width:min(1100px,100%);display:grid;grid-template-columns:1.4fr 1fr;overflow:hidden;border:1px solid #303039;border-radius:24px;background:#101116;box-shadow:0 30px 90px #0008}.showcase{background:#050608;display:grid;place-items:center;padding:8px}.showcase img{display:block;width:100%;border-radius:16px}.module{padding:36px 26px;text-align:center;display:flex;flex-direction:column;justify-content:center}.brand{direction:ltr;display:flex;align-items:center;justify-content:center;gap:12px;font-size:22px;letter-spacing:1px}.brand img{width:50px;height:50px;border-radius:50%;border:1px solid #ef233c}.brand span{color:#ef233c}.tag{direction:ltr;color:#ff697c;font-size:13px;margin:24px 0 0}h1{font-size:34px;margin:14px 0}#count{font-size:17px;line-height:1.8;min-height:62px}#cache{font-size:13px;line-height:1.8;color:#b8b9c4;min-height:24px}.track{height:9px;overflow:hidden;border-radius:20px;background:#282831;margin-top:15px}#bar{height:100%;width:4%;background:#ef233c;transition:width .2s}.note{font-size:11px;line-height:1.8;color:#8c8d98}button{border:0;border-radius:10px;padding:15px;background:#ef233c;color:#fff;font-size:16px;cursor:pointer}.source{color:#8c8d98;font-size:10px;margin-top:22px;direction:ltr}.source a{color:inherit}@media(max-width:800px){.shell{padding:16px}.console{grid-template-columns:1fr}.module{padding:28px 20px}.showcase img{border-radius:12px}}
+  </style>
+</head>
+<body>
+  <main class="shell"><section class="console">
+    <div class="showcase"><img src="../hazzaz-store-banner.jpg" alt="Hazzaz Store"></div>
+    <div class="module">
+      <div class="brand"><img src="../hazzaz-logo-red.jpg" alt="شعار Hazzaz Store"><b><span>HAZZAZ</span> STORE</b></div>
+      <p class="tag">PS4 14.02 • GoldHEN v2.4b18.14</p>
+      <h1>تشغيل تلقائي</h1>
+      <p id="count" role="status">جارٍ تجهيز ملفات إصدارك...</p>
+      <div class="track" aria-hidden="true"><div id="bar"></div></div>
+      <p id="cache" aria-live="polite"></p>
+      <button id="retry" type="button" hidden>إعادة المحاولة</button>
+      <p class="note">انتظر فقط؛ يبدأ التشغيل تلقائيًا بعد حفظ الملفات. أبقِ الإنترنت متصلًا في الزيارة الأولى حتى يكتمل الحفظ.</p>
+      <p class="source">WebKitty / Afterglow / GoldHEN • <a href="https://github.com/HazzazStore/hazzazstore.github.io/tree/main/webkitty">Source &amp; license</a></p>
+    </div>
+  </section></main>
+  <script src="../auto-cache.js"></script>
+  <script src="launch.js"></script>
+</body>
+</html>

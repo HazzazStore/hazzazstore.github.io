@@ -1,7 +1,11 @@
 CACHE MANIFEST
-# Hazzaz Store multi-firmware cache 2026-11-03 / slopkit-v3 / Afterglow home
+# Hazzaz automatic launch v7 / 2026-11-14 / 14.02
 
 CACHE:
+./
+auto-cache.js
+host.js
+cache-flow.js
 hazzaz-logo-red.jpg
 hazzaz-store-banner.jpg
 cacheslopkit.html

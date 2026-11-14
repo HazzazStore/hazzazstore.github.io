@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#08090c">
-  <meta name="site-version" content="hazzaz-store-multifw-v5">
-  <meta name="source-revision" content="gamerhack/g2all-2026-10-06 + well0nez/afterglow-web@acf25a8">
-  <title>Hazzaz Store | PS4 7.00–14.00 Host</title>
-  <meta name="description" content="واجهة Hazzaz Store لتشغيل GoldHEN على إصدارات PS4 المدعومة من 7.00 إلى 14.00، مع Afterglow لإصدار 14.00.">
+  <meta name="site-version" content="hazzaz-store-multifw-auto-v7">
+  <meta name="source-revision" content="gamerhack/g2all-2026-10-06 + well0nez/afterglow-web@acf25a8 + ArabPixel/WebKitty@8c8ee71">
+  <title>Hazzaz Store | PS4 7.00–14.02 Host</title>
+  <meta name="description" content="واجهة Hazzaz Store لتشغيل GoldHEN تلقائيًا على إصدارات PS4 المدعومة حتى 14.02، مع حفظ الملفات دون ضغط أي أزرار.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%2308090c'/%3E%3Cpath d='M16 14v36M48 14v36M16 32h32' stroke='%23ef233c' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
   <style>
     * { box-sizing: border-box; }
+    [hidden] { display:none!important; }
     html, body { margin: 0; min-height: 100%; font-family: Arial, Tahoma, sans-serif; }
     body { color: #f5f7fa; background: #08090c; }
     button, a { font: inherit; }
@@ -67,7 +68,7 @@
   <div class="ambient-copy" aria-hidden="true"><strong>HAZZAZ STORE</strong><span>الثقة • الأمانة</span></div>
   <header>
     <a class="brand" href="./" aria-label="Hazzaz Store home"><img class="brand-logo" src="./hazzaz-logo-red.jpg" alt="شعار Hazzaz Store"><span class="brand-copy"><strong><span>HAZZAZ</span> STORE</strong><small>الثقة • الأمانة</small></span></a>
-    <div class="top-meta"><span class="live-dot" aria-hidden="true"></span><span class="version-chip">PS4 • 7.00–14.00</span></div>
+    <div class="top-meta"><span class="live-dot" aria-hidden="true"></span><span class="version-chip">PS4 • 7.00–14.02</span></div>
   </header>
   <main>
     <section class="console" aria-label="Hazzaz Store وتشغيل الإصدارات المدعومة">
@@ -75,51 +76,19 @@
         <img src="./hazzaz-store-banner.jpg" alt="إعلان Hazzaz Store لصيانة وتعديل وتنزيل ألعاب أجهزة PlayStation">
       </div>
       <div class="module">
-        <div class="module-label"><span>SUPPORTED FIRMWARE</span><b>READY</b></div>
-        <div class="firmwares" aria-label="الإصدارات المدعومة"><span>7.00–8.52</span><span>9.00–9.60</span><span>10.00–11.02</span><span>11.50–12.02</span><span>12.50–13.00</span><span>13.02–13.52</span><span class="new-fw">14.00 • Afterglow • NEW</span></div>
+        <div class="module-label"><span>SUPPORTED FIRMWARE</span><b>AUTO</b></div>
+        <div class="firmwares" aria-label="الإصدارات المدعومة"><span>7.00–8.52</span><span>9.00–9.60</span><span>10.00–11.02</span><span>11.50–12.02</span><span>12.50–13.00</span><span>13.02–13.52</span><span class="new-fw">14.00 / 14.02 • Afterglow / WebKitty</span></div>
         <div class="status-card" aria-live="polite"><div id="msgs">جارٍ التحقق من إصدار النظام...</div><div id="det"></div><div id="cache">جارٍ فحص ملفات التشغيل...</div><div id="state"></div><pre id="out"></pre></div>
-        <button class="run" id="run" type="button" disabled><span id="run-label">انتظر قليلًا</span><span class="run-icon">▶</span></button>
-        <p class="hint">اضغط زر X بعد ظهور «جاهز». في أول زيارة سيتم حفظ ملفات إصدارك للاستخدام دون اتصال. إصدار 14.00 يعمل عبر Afterglow التجريبي.</p>
+        <div class="run" id="run" role="status"><span id="run-label">التشغيل التلقائي</span><span class="run-icon" aria-hidden="true">↻</span></div>
+        <button class="run" id="retry" type="button" hidden>إعادة المحاولة</button>
+        <p class="hint">افتح الرابط وانتظر فقط. سيتم اكتشاف الإصدار وحفظ ملفاته وتشغيل GoldHEN تلقائيًا. أبقِ الإنترنت متصلًا في أول زيارة حتى يكتمل الحفظ.</p>
         <a class="contact" href="tel:0917777697" aria-label="اتصل بمتجر Hazzaz Store على الرقم 0917777697">0917777697</a>
       </div>
     </section>
   </main>
-  <footer>Hazzaz Store • الثقة والأمانة • Engine: GamerHack / PSFree / GoldHEN / Afterglow contributors</footer>
+  <footer>Hazzaz Store • الثقة والأمانة • Engine: GamerHack / PSFree / GoldHEN / Afterglow / WebKitty contributors</footer>
 </div>
-<script>
-(function(){
-  var msgsEl=document.getElementById("msgs"),detEl=document.getElementById("det"),cacheEl=document.getElementById("cache"),runEl=document.getElementById("run"),runLabelEl=document.getElementById("run-label"),launched=false;
-  window.msgs=msgsEl;
-  function setMessage(t,c){msgsEl.textContent=t;msgsEl.className=c||""} function setCache(t,ok){cacheEl.textContent=t;cacheEl.className=ok?"cacheok":""}
-  function arm(label){runLabelEl.textContent=label;runEl.disabled=false;try{runEl.focus()}catch(e){}} function disarm(label){runLabelEl.textContent=label;runEl.disabled=true}
-  function routeFor(fw){
-    if(fw===14.00)return{page:"afterglow/index.html",label:"تشغيل GoldHEN — Afterglow"};
-    if(fw>=7.00&&fw<=8.52)return{cache:"cache700.html",src:"700/alert.js",module:true};
-    if(fw>=9.00&&fw<=9.60)return{cache:"cache900.html",src:"900/alert.js",module:true};
-    if(fw>=10.00&&fw<=11.02)return{cache:"cachecss.html",src:"css/main.js",css:true};
-    if(fw>=11.50&&fw<=12.02)return{cache:"cacheslopkit.html",src:"slopkit/chain_lapse.js",module:true};
-    if(fw>=12.50&&fw<=13.00)return{cache:"cacheslopkit.html",src:"slopkit/chain_poops.js",module:true};
-    if(fw>=13.02&&fw<=13.52)return{cache:"cacheslopkit.html",src:"slopkit/jb.js?v=19",module:true};
-    return null;
-  }
-  function loadExploit(route){
-    setMessage("جارٍ تشغيل GoldHEN... لا تغلق الصفحة","warn");setCache("تم اختيار المحرك المناسب لإصدار جهازك.",true);
-    var script=document.createElement("script");if(route.module)script.type="module";script.src=route.src;
-    script.onerror=function(){launched=false;setMessage("تعذر تحميل ملفات التشغيل — امسح بيانات المتصفح وثبّت التخزين من جديد","bad");arm("إعادة المحاولة")};
-    if(route.css)script.onload=function(){setTimeout(function(){doJb()},500)};document.head.appendChild(script);
-  }
-  var match=navigator.userAgent.match(/PlayStation 4[ \/]([\d.]+)/i),firmwareText=match?match[1]:"UNKNOWN",firmware=match?parseFloat(firmwareText):NaN,route=match?routeFor(firmware):null;
-  detEl.innerHTML="FIRMWARE <b>"+firmwareText+"</b>"+(route?" &nbsp;•&nbsp; <b>SUPPORTED</b>":" &nbsp;•&nbsp; UNSUPPORTED");
-  if(!match){setMessage("افتح هذا الرابط من متصفح جهاز PS4","warn");setCache("سيتم اكتشاف الإصدار واختيار المحرك تلقائيًا.",false);disarm("متاح على PS4 فقط");return}
-  if(!route){setMessage("الإصدار "+firmwareText+" غير مدعوم في هذه الحزمة","bad");setCache("النطاقات المدعومة موضحة أعلى الزر.",false);disarm("إصدار غير مدعوم");return}
-  if(route.page){setMessage("تم اكتشاف الإصدار "+firmwareText+" — جاهز","ok");setCache("Afterglow • GoldHEN • نسخة تجريبية",true);arm(route.label);runEl.addEventListener("click",openAfterglow,false);window.addEventListener("keydown",function(e){if(e&&(e.keyCode===13||e.keyCode===32))openAfterglow()},false);function openAfterglow(){if(runEl.disabled||launched)return;launched=true;disarm("جارٍ فتح Afterglow...");location.href=route.page}return}
-  var cacheReady=false;try{cacheReady=localStorage.getItem("multifw-cache-v2")==="1"}catch(e){}
-  setMessage("تم اكتشاف الإصدار "+firmwareText+" — جاهز","ok");
-  if(window.applicationCache&&window.applicationCache.status!==0&&cacheReady){setCache("ملفات إصدارك محفوظة — يمكن التشغيل دون اتصال",true);arm("تشغيل GoldHEN")}
-  else{setCache("يلزم حفظ ملفات إصدارك في الزيارة الأولى.",false);arm("تثبيت الملفات")}
-  function fire(){if(runEl.disabled||launched)return;launched=true;disarm("جارٍ التشغيل...");if(!window.applicationCache||window.applicationCache.status===0||!cacheReady){setMessage("جارٍ فتح صفحة تثبيت ملفات إصدارك...","warn");location.replace(route.cache);return}loadExploit(route)}
-  runEl.addEventListener("click",fire,false);window.addEventListener("keydown",function(e){if(!runEl.disabled&&(!e||e.keyCode===13||e.keyCode===32))fire()},false);
-})();
-</script>
+<script src="auto-cache.js"></script>
+<script src="host.js"></script>
 </body>
 </html>

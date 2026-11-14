@@ -1,7 +1,11 @@
 CACHE MANIFEST
-# Legacy cache migration: Hazzaz Store multi-firmware v5 / 2026-11-03 / Afterglow 14.00
+# Hazzaz automatic launch v7 / 2026-11-14 / 14.02
 
 CACHE:
+./
+auto-cache.js
+host.js
+cache-flow.js
 index.html
 hazzaz-logo-red.jpg
 hazzaz-store-banner.jpg
