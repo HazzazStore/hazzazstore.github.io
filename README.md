@@ -40,3 +40,7 @@ Afterglow تجريبي ويدعم 13.52 و14.00 فقط؛ الدعم التلقا
 مسار 14.02 منفصل داخل `webkitty/`؛ مصدر المحرك عند المراجعة `8c8ee71bc7622dcb80713889029d6a16c8a269ab` من ArabPixel/WebKitty. ملفات المحرك الستة وGoldHEN v2.4b18.14 مطابقة للمصدر. راجع `webkitty/UPSTREAM.json` و`webkitty/README.md` للتوثيق والترخيص وحدود التحقق. ملفات المحركات والحمولات للإصدارات السابقة محفوظة دون تعديل.
 
 التحقق المحلي: `node tools/verify-host.mjs` (دون تشغيل الثغرة أثناء الاختبارات).
+
+## Offline resume correction — 2026-11-14
+
+A failed online manifest check now resumes the existing complete cache when Application Cache returns to IDLE or has an update ready. UNCACHED, incomplete and OBSOLETE states still stop instead of reporting a successful save. Existing firmware cache markers are retained; a failed update does not advance their revision. The exact 14.00 execution URL, including its query string, is explicitly cached so offline navigation does not depend on a previous online execution having saved it as an implicit master entry. Regression checks cover these offline states; physical PS4 offline execution remains unverified here.
